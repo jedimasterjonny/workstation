@@ -182,6 +182,7 @@ create_workstation_resources() {
             --shielded-integrity-monitoring \
             --container-custom-image="$FULL_IMAGE_PATH" \
             --service-account="$WORKSTATION_SA_EMAIL" \
+            --service-account-scopes=https://www.googleapis.com/auth/cloud-platform \
             --disable-public-ip-addresses \
             --project="$PROJECT_ID"
     else
