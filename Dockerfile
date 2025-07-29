@@ -5,3 +5,5 @@ RUN apt-get update && \
     python3-venv \
     && apt-get remove --purge --auto-remove -y \
     && rm -rf /var/lib/apt/lists/*
+
+RUN npm install --quiet -g @google/gemini-cli
