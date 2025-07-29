@@ -1,14 +1,15 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '${_FULL_IMAGE_PATH}', '.']
+  args: ['build', '-t', '${_IMAGE_REPO_PATH}:${SHORT_SHA}', '-t', '${_IMAGE_REPO_PATH}:latest', '.']
 
 images:
-- '${_FULL_IMAGE_PATH}'
+- '${_IMAGE_REPO_PATH}:${SHORT_SHA}'
+- '${_IMAGE_REPO_PATH}:latest'
 
 serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/${_BUILD_SA_EMAIL}'
 logsBucket: 'gs://${_LOGS_BUCKET_NAME}/logs'
 
 substitutions:
-  _FULL_IMAGE_PATH: '${LOCATION}-docker.pkg.dev/${PROJECT_ID}/workstation-image/workstation-image:${SHORT_SHA}'
+  _IMAGE_REPO_PATH: '${LOCATION}-docker.pkg.dev/${PROJECT_ID}/workstation-image/workstation-image'
   _LOGS_BUCKET_NAME: '${PROJECT_ID}-cloudbuild-logs'
   _BUILD_SA_EMAIL: 'cloud-build-sa@${PROJECT_ID}.iam.gserviceaccount.com'
