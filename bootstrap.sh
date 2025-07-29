@@ -116,6 +116,7 @@ setup_iam() {
 
     echo "Applying Project-level policies..."
     gcloud projects add-iam-policy-binding "$PROJECT_ID" --member="serviceAccount:$BUILD_SA_EMAIL" --role="roles/logging.logWriter"
+    gcloud projects add-iam-policy-binding "$PROJECT_ID" --member="serviceAccount:$BUILD_SA_EMAIL" --role="roles/workstations.admin"
     gcloud projects add-iam-policy-binding "$PROJECT_ID" --member="serviceAccount:$WORKSTATION_SA_EMAIL" --role="roles/aiplatform.user"
 }
 

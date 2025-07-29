@@ -1,6 +1,15 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', '${_IMAGE_REPO_PATH}:${SHORT_SHA}', '-t', '${_IMAGE_REPO_PATH}:latest', '.']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
+  args: ['workstations',
+         'configs',
+         'update',
+         'base-config',
+         '--region=${LOCATION}',
+         '--cluster=cluster',
+         '--container-custom-image=${_IMAGE_REPO_PATH}:${SHORT_SHA}']
 
 images:
 - '${_IMAGE_REPO_PATH}:${SHORT_SHA}'
